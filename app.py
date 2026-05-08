@@ -133,12 +133,18 @@ div[data-testid="stNumberInput"] label span {
 
 
 def get_adoption(aov):
-    if aov < 50:   return 30, "30%",        "<$50"
-    if aov < 200:  return 45, "40–50%",     "$50–200"
-    if aov < 400:  return 55, "50–60%",     "$200–400"
-    if aov < 600:  return 65, "60–70%",     "$400–600"
-    if aov < 1000: return 75, "70–80%",     "$600–1000"
-    return          80, "80%",              "$1000+"
+    if aov < 50:
+        return 30, "30%", "<$50"
+    elif aov < 200:
+        return 45, "40-50%", "$50-200"
+    elif aov < 400:
+        return 55, "50-60%", "$200-400"
+    elif aov < 600:
+        return 65, "60-70%", "$400-600"
+    elif aov < 1000:
+        return 75, "70-80%", "$600-1000"
+    else:
+        return 80, "80%", "$1000+"
 
 def get_tier(aov):
     if aov >= 1000:
@@ -201,7 +207,7 @@ with col2:
 with col3:
     st.markdown("**Adoption rate (%) — auto**")
     adopt = st.number_input("Adoption rate (%)", min_value=1, max_value=100,
-                             value=auto_adopt, step=1,
+                             value=int(auto_adopt), step=1,
                              label_visibility="collapsed",
                              help="Auto-filled from AOV tier · override if needed")
     st.caption(f"Reference range: {adopt_range} for AOV {adopt_aov_label} · override if needed")
