@@ -86,11 +86,16 @@ input[type="number"] {
     font-size: 15px !important; font-weight: 500 !important;
 }
 
-/* Expander — explicit color so it is always visible */
-[data-testid="stExpander"] summary p {
+/* Expander — push text right so chevron does not overlap */
+[data-testid="stExpander"] summary {
+    padding-left: 2rem !important;
+}
+[data-testid="stExpander"] summary p,
+[data-testid="stExpander"] summary span {
     font-size: 14px !important;
     font-weight: 600 !important;
     color: #9496ea !important;
+    padding-left: 8px !important;
 }
 
 .footer {
@@ -231,7 +236,7 @@ with m3:
 st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
 
 # ── BREAKDOWN EXPANDER ──
-with st.expander("Full calculation breakdown"):
+with st.expander("   Full calculation breakdown"):
     st.markdown("<div style='height:6px'></div>", unsafe_allow_html=True)
     b1, b2, b3, b4 = st.columns(4)
     with b1:
