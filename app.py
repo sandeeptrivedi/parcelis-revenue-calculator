@@ -221,7 +221,7 @@ fig.add_trace(go.Scatter(
     name="GMV uplift",
     x=labels,
     y=[0, uplift_ann],
-    mode="lines+markers",
+    mode="lines+markers+text",
     line=dict(color="#4547d4", width=2.5),
     marker=dict(color="#4547d4", size=8, line=dict(color="#fff", width=2)),
     fill="tozeroy",
@@ -230,7 +230,6 @@ fig.add_trace(go.Scatter(
     text=["", f"+${uplift_ann/1000:.1f}k" if uplift_ann < 1_000_000 else f"+${uplift_ann/1_000_000:.2f}M"],
     textposition="top center",
     textfont=dict(size=12, color="#4547d4"),
-    mode="lines+markers+text",
 ))
 
 fig.update_layout(
