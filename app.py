@@ -191,6 +191,10 @@ st.caption("Enter your store numbers. Premium and markup auto-fill from AOV — 
 st.markdown("---")
 
 # ── INPUTS TOP ──
+# Use session state to get current AOV before rendering adoption input
+_aov_preview = st.session_state.get("aov_input", 200)
+_auto_adopt_preview, _adopt_range_preview, _adopt_aov_label_preview = get_adoption(_aov_preview)
+
 col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown("**Monthly orders**")
@@ -201,16 +205,17 @@ with col1:
 with col2:
     st.markdown("**Average order value ($)**")
     aov = st.number_input("Average order value ($)", min_value=1, value=200, step=10,
+                           key="aov_input",
                            label_visibility="collapsed",
                            help="Sets the premium & markup tier automatically")
     st.caption("Drives premium & markup tier")
 with col3:
     st.markdown("**Adoption rate (%) — auto**")
     adopt = st.number_input("Adoption rate (%)", min_value=1, max_value=100,
-                             value=int(auto_adopt), step=1,
+                             value=int(_auto_adopt_preview), step=1,
                              label_visibility="collapsed",
                              help="Auto-filled from AOV tier · override if needed")
-    st.caption(f"Reference range: {adopt_range} for AOV {adopt_aov_label} · override if needed")
+    st.caption(f"Reference range: {_adopt_range_preview} for AOV {_adopt_aov_label_preview} · override if needed")
 
 auto_premium, auto_markup, tier_label = get_tier(aov)
 auto_adopt, adopt_range, adopt_aov_label = get_adoption(aov)
