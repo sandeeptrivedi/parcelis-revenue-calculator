@@ -16,12 +16,39 @@ html, body, [class*="st-"], .stMarkdown, .stCaption, p, label, div {
     font-family: 'DM Sans', sans-serif !important;
 }
 
+/* Hide Streamlit default top header bar that overlaps expander labels */
+#MainMenu { visibility: hidden !important; }
+header[data-testid="stHeader"] { display: none !important; }
+[data-testid="stToolbar"] { display: none !important; }
+[data-testid="stDecoration"] { display: none !important; }
+footer { display: none !important; }
+
+/* Ensure main block starts from top with no offset */
+.block-container {
+    padding-top: 2rem !important;
+}
+
 .header-bar {
     background: #131480;
     padding: 18px 28px; border-radius: 12px;
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 24px;
+    position: relative;
+    z-index: 0;
 }
+
+/* Fix expander label overlap — ensure streamlit header doesn't bleed */
+[data-testid="stExpander"] summary,
+[data-testid="stExpander"] summary p,
+.streamlit-expanderHeader p {
+    position: relative !important;
+    z-index: 1 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+}
+
+/* Hide the Streamlit top decoration that causes overlap */
+[data-testid="stDecoration"] { display: none !important; }
 .logo-text { font-size: 17px; font-weight: 600; color: #fff !important; }
 .logo-text span { color: #9496ea !important; font-weight: 400; font-size: 13px; margin-left: 6px; }
 .header-sub { font-size: 11px; color: rgba(255,255,255,0.45) !important; }
