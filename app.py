@@ -31,19 +31,20 @@ p, label, div { font-family: 'DM Sans', sans-serif !important; }
 /* Section labels */
 .section-label {
     font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
-    text-transform: uppercase; color: #4547d4 !important; margin-bottom: 2px;
+    text-transform: uppercase; color: #7879e8; margin-bottom: 2px;
 }
 .divider-label {
-    font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
-    text-transform: uppercase; color: #4547d4 !important;
-    border-top: 1px solid #dcddf9; padding-top: 14px; margin-top: 4px; margin-bottom: 4px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #7879e8;
+    border-top: 1px solid rgba(120,121,232,0.3);
+    padding-top: 14px; margin-top: 4px; margin-bottom: 4px;
 }
 
 /* Tier pill */
 .tier-pill {
-    background: #f0f0fd; border: 1px solid #dcddf9;
+    background: rgba(69,71,212,0.15); border: 1px solid rgba(69,71,212,0.4);
     border-radius: 100px; padding: 6px 16px;
-    font-size: 12px; font-weight: 500; color: #2e30c4 !important;
+    font-size: 12px; font-weight: 500; color: #9496ea !important;
     display: inline-block; margin-top: 10px; margin-bottom: 4px;
 }
 
@@ -90,21 +91,18 @@ input[type="number"] {
     font-family: 'DM Mono', monospace !important;
     font-size: 15px !important;
     font-weight: 500 !important;
-    color: #0c0d2e !important;
-    background-color: #f6f6fd !important;
-    border: 1.5px solid #dcddf9 !important;
-    border-radius: 8px !important;
-}
-input[type="number"]:focus {
-    border-color: #4547d4 !important;
-    background-color: #fff !important;
 }
 
-/* Input labels */
-.stNumberInput label, .stNumberInput > label {
-    font-size: 12px !important;
-    font-weight: 500 !important;
-    color: rgba(12,13,46,0.75) !important;
+/* Input labels — high contrast for both light and dark mode */
+.stNumberInput label, .stNumberInput > label,
+div[data-testid="stNumberInput"] > label,
+div[data-testid="stNumberInput"] label p,
+div[data-testid="stNumberInput"] label span {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: inherit !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 /* Expander */
@@ -181,14 +179,23 @@ st.markdown("---")
 # ── INPUTS TOP ──
 col1, col2, col3 = st.columns(3)
 with col1:
+    st.markdown("**Monthly orders**")
     orders = st.number_input("Monthly orders", min_value=1, value=10000, step=500,
+                              label_visibility="collapsed",
                               help="Total orders shipped per month")
+    st.caption("Orders shipped / month")
 with col2:
+    st.markdown("**Average order value ($)**")
     aov = st.number_input("Average order value ($)", min_value=1, value=200, step=10,
+                           label_visibility="collapsed",
                            help="Sets the premium & markup tier automatically")
+    st.caption("Drives premium & markup tier")
 with col3:
+    st.markdown("**Adoption rate (%)**")
     adopt = st.number_input("Adoption rate (%)", min_value=1, max_value=100, value=60, step=1,
+                             label_visibility="collapsed",
                              help="Buyers who opt in to shipping protection at checkout")
+    st.caption("Buyers opting in at checkout")
 
 auto_premium, auto_markup, tier_label = get_tier(aov)
 
@@ -197,13 +204,19 @@ st.markdown('<p class="divider-label">Auto-filled from AOV — override if neede
 # ── INPUTS BOTTOM ──
 col4, col5 = st.columns(2)
 with col4:
-    premium = st.number_input("Protection premium — buyer pays ($)", min_value=0.01,
+    st.markdown("**Protection premium — buyer pays ($)**")
+    premium = st.number_input("Protection premium", min_value=0.01,
                                value=float(auto_premium), step=0.01, format="%.2f",
+                               label_visibility="collapsed",
                                help="What the buyer pays at checkout")
+    st.caption("Auto-filled from AOV · override if needed")
 with col5:
-    markup = st.number_input("Markup per insured order ($)", min_value=0.01,
+    st.markdown("**Markup per insured order ($)**")
+    markup = st.number_input("Markup per insured order", min_value=0.01,
                               value=float(auto_markup), step=0.01, format="%.2f",
+                              label_visibility="collapsed",
                               help="Your earnings per protected order")
+    st.caption("Auto-filled from AOV · override if needed")
 
 st.markdown(f'<div class="tier-pill">● &nbsp; {tier_label}</div>', unsafe_allow_html=True)
 st.markdown("---")
