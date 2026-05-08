@@ -12,68 +12,124 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
+/* Base font */
+html, body, [class*="st-"], .stMarkdown, .stCaption,
+p, label, div { font-family: 'DM Sans', sans-serif !important; }
 
+/* Header */
 .header-bar {
     background: #131480;
     padding: 18px 28px;
     border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px;
 }
-.logo-text { font-size: 17px; font-weight: 600; color: #fff; letter-spacing: 0.01em; }
-.logo-text span { color: #9496ea; font-weight: 400; font-size: 13px; margin-left: 6px; }
-.header-sub { font-size: 11px; color: rgba(255,255,255,0.38); }
+.logo-text { font-size: 17px; font-weight: 600; color: #fff !important; }
+.logo-text span { color: #9496ea !important; font-weight: 400; font-size: 13px; margin-left: 6px; }
+.header-sub { font-size: 11px; color: rgba(255,255,255,0.45) !important; }
 
+/* Section labels */
 .section-label {
     font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
-    text-transform: uppercase; color: #4547d4; margin-bottom: 2px;
+    text-transform: uppercase; color: #4547d4 !important; margin-bottom: 2px;
 }
 .divider-label {
     font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
-    text-transform: uppercase; color: #4547d4;
-    border-top: 1px solid #dcddf9; padding-top: 14px; margin-top: 6px; margin-bottom: 4px;
+    text-transform: uppercase; color: #4547d4 !important;
+    border-top: 1px solid #dcddf9; padding-top: 14px; margin-top: 4px; margin-bottom: 4px;
 }
+
+/* Tier pill */
 .tier-pill {
     background: #f0f0fd; border: 1px solid #dcddf9;
     border-radius: 100px; padding: 6px 16px;
-    font-size: 12px; font-weight: 500; color: #2e30c4;
-    display: inline-block; margin-top: 8px;
+    font-size: 12px; font-weight: 500; color: #2e30c4 !important;
+    display: inline-block; margin-top: 10px; margin-bottom: 4px;
 }
 
+/* Metric cards */
 .metric-card {
     background: #EDFAF4; border: 1px solid #A8E6CA;
-    border-radius: 10px; padding: 18px 20px; text-align: center;
+    border-radius: 10px; padding: 20px; text-align: center; height: 100%;
 }
 .metric-label {
-    font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
-    text-transform: uppercase; color: #0A6640; opacity: 0.75; margin-bottom: 6px;
+    font-size: 10px !important; font-weight: 600 !important; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #0A6640 !important; margin-bottom: 8px;
 }
 .metric-value {
-    font-family: 'DM Mono', monospace; font-size: 26px;
-    font-weight: 500; color: #0D7A4A; line-height: 1;
+    font-family: 'DM Mono', monospace !important; font-size: 28px !important;
+    font-weight: 500 !important; color: #0D7A4A !important; line-height: 1.1;
 }
-.metric-sub { font-size: 11px; color: #0A6640; opacity: 0.6; margin-top: 5px; }
-
-.footer-text {
-    text-align: center; font-size: 11px; color: rgba(12,13,46,0.4);
-    margin-top: 32px; padding-top: 16px; border-top: 1px solid #f0f0fd;
+.metric-sub {
+    font-size: 11px !important; color: #0A6640 !important;
+    opacity: 0.65; margin-top: 6px;
 }
-.footer-text a { color: #4547d4; text-decoration: none; }
 
-/* Override streamlit number input styling */
-div[data-testid="stNumberInput"] input {
+/* Fix number input stepper buttons — make +/- labels visible */
+button[data-testid="stNumberInputStepUp"],
+button[data-testid="stNumberInputStepDown"] {
+    background-color: #f0f0fd !important;
+    border: 1px solid #dcddf9 !important;
+    color: #1e2099 !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+button[data-testid="stNumberInputStepUp"]:hover,
+button[data-testid="stNumberInputStepDown"]:hover {
+    background-color: #dcddf9 !important;
+    color: #1e2099 !important;
+}
+button[data-testid="stNumberInputStepUp"] svg,
+button[data-testid="stNumberInputStepDown"] svg {
+    fill: #1e2099 !important;
+    stroke: #1e2099 !important;
+}
+
+/* Number input field */
+input[type="number"] {
     font-family: 'DM Mono', monospace !important;
     font-size: 15px !important;
     font-weight: 500 !important;
+    color: #0c0d2e !important;
+    background-color: #f6f6fd !important;
+    border: 1.5px solid #dcddf9 !important;
+    border-radius: 8px !important;
 }
-div[data-testid="stNumberInput"] label {
+input[type="number"]:focus {
+    border-color: #4547d4 !important;
+    background-color: #fff !important;
+}
+
+/* Input labels */
+.stNumberInput label, .stNumberInput > label {
     font-size: 12px !important;
     font-weight: 500 !important;
-    color: rgba(12,13,46,0.7) !important;
+    color: rgba(12,13,46,0.75) !important;
 }
+
+/* Expander */
+.streamlit-expanderHeader {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #4547d4 !important;
+}
+
+/* st.metric values inside expander */
+[data-testid="stMetricValue"] {
+    font-family: 'DM Mono', monospace !important;
+    color: #0c0d2e !important;
+}
+[data-testid="stMetricLabel"] {
+    color: rgba(12,13,46,0.55) !important;
+    font-size: 12px !important;
+}
+
+/* Footer */
+.footer-text {
+    text-align: center; font-size: 11px; color: rgba(12,13,46,0.4) !important;
+    margin-top: 32px; padding-top: 16px; border-top: 1px solid #ebebf8;
+}
+.footer-text a { color: #4547d4 !important; text-decoration: none; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -82,7 +138,7 @@ def get_tier(aov):
     if aov >= 1000:
         p = round(aov * 0.05, 2)
         m = round(aov * 0.03, 2)
-        return p, m, f"AOV $1,000+  ·  5% premium  ·  3% markup"
+        return p, m, "AOV $1,000+  ·  5% premium  ·  3% markup"
     base, step = 2.50, 1.25
     bucket = max(0, int((aov - 200) / 100)) if aov >= 200 else 0
     extra  = (bucket + 1) * step if aov >= 200 else 0
@@ -100,6 +156,14 @@ def fmt(n):
     return f"${n:,}"
 
 
+def fmt_label(n):
+    n = round(n)
+    if n >= 1_000_000: return f"${n/1_000_000:.2f}M"
+    if n >= 1_000:     return f"${n/1_000:.1f}k"
+    return f"${n:,}"
+
+
+# ── HEADER ──
 st.markdown("""
 <div class="header-bar">
   <div>
@@ -112,11 +176,10 @@ st.markdown("""
 st.markdown('<p class="section-label">Merchant uplift estimator</p>', unsafe_allow_html=True)
 st.markdown("### How much will Parcelis add to your revenue?")
 st.caption("Enter your store numbers. Premium and markup auto-fill from AOV — override anytime.")
-
 st.markdown("---")
 
+# ── INPUTS TOP ──
 col1, col2, col3 = st.columns(3)
-
 with col1:
     orders = st.number_input("Monthly orders", min_value=1, value=10000, step=500,
                               help="Total orders shipped per month")
@@ -131,6 +194,7 @@ auto_premium, auto_markup, tier_label = get_tier(aov)
 
 st.markdown('<p class="divider-label">Auto-filled from AOV — override if needed</p>', unsafe_allow_html=True)
 
+# ── INPUTS BOTTOM ──
 col4, col5 = st.columns(2)
 with col4:
     premium = st.number_input("Protection premium — buyer pays ($)", min_value=0.01,
@@ -142,48 +206,45 @@ with col5:
                               help="Your earnings per protected order")
 
 st.markdown(f'<div class="tier-pill">● &nbsp; {tier_label}</div>', unsafe_allow_html=True)
-
 st.markdown("---")
 
+# ── CALCULATIONS ──
 insured  = round(orders * adopt / 100)
 rev_mo   = insured * markup
 rev_ann  = rev_mo * 12
 gmv      = orders * aov
 pct      = (rev_mo / gmv * 100) if gmv > 0 else 0
 
+# ── METRIC CARDS ──
 st.markdown('<p class="section-label">Breakdown</p>', unsafe_allow_html=True)
+st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
 
 m1, m2, m3 = st.columns(3)
-
 with m1:
     st.markdown(f"""
     <div class="metric-card">
       <div class="metric-label">Revenue / month</div>
       <div class="metric-value">{fmt(rev_mo)}</div>
       <div class="metric-sub">from Parcelis markup</div>
-    </div>
-    """, unsafe_allow_html=True)
-
+    </div>""", unsafe_allow_html=True)
 with m2:
     st.markdown(f"""
     <div class="metric-card">
       <div class="metric-label">Revenue / year</div>
       <div class="metric-value">{fmt(rev_ann)}</div>
       <div class="metric-sub">annualised</div>
-    </div>
-    """, unsafe_allow_html=True)
-
+    </div>""", unsafe_allow_html=True)
 with m3:
     st.markdown(f"""
     <div class="metric-card">
       <div class="metric-label">GMV uplift %</div>
       <div class="metric-value">{pct:.2f}%</div>
       <div class="metric-sub">of total GMV</div>
-    </div>
-    """, unsafe_allow_html=True)
+    </div>""", unsafe_allow_html=True)
 
-st.markdown("<br>", unsafe_allow_html=True)
+st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
 
+# ── EXPANDER ──
 with st.expander("See full calculation breakdown"):
     d1, d2, d3, d4 = st.columns(4)
     d1.metric("Orders insured / mo", f"{insured:,}")
@@ -191,79 +252,79 @@ with st.expander("See full calculation breakdown"):
     d3.metric("Monthly GMV", fmt(gmv))
     d4.metric("Markup / order", f"${markup:.2f}")
 
-
 st.markdown("---")
+
+# ── CHART ──
 st.markdown('<p class="section-label">Annual revenue comparison</p>', unsafe_allow_html=True)
+st.markdown("<div style='height:6px'></div>", unsafe_allow_html=True)
 
 base_ann   = round(gmv * 12)
 with_ann   = round(gmv * 12 + rev_ann)
-uplift_ann = round(rev_ann)
+uplift_ann = max(round(rev_ann), 1)  # guard against zero
 
-labels = ["Without Parcelis", "With Parcelis"]
+bar_labels = ["Without Parcelis", "With Parcelis"]
 
 fig = go.Figure()
 
 fig.add_trace(go.Bar(
-    name="Annual revenue",
-    x=labels,
-    y=[base_ann, with_ann],
-    marker_color=["#dcddf9", "#0D7A4A"],
+    name="Without Parcelis",
+    x=["Without Parcelis"],
+    y=[base_ann],
+    marker=dict(color="#dcddf9"),
     marker_line_width=0,
-    width=0.4,
-    yaxis="y",
-    text=[f"${base_ann/1000:.1f}k" if base_ann < 1_000_000 else f"${base_ann/1_000_000:.2f}M",
-          f"${with_ann/1000:.1f}k" if with_ann < 1_000_000 else f"${with_ann/1_000_000:.2f}M"],
+    width=0.38,
+    text=[fmt_label(base_ann)],
     textposition="outside",
-    textfont=dict(size=12, color="#0c0d2e"),
+    textfont=dict(size=13, color="#0c0d2e", family="DM Mono, monospace"),
 ))
 
-fig.add_trace(go.Scatter(
+fig.add_trace(go.Bar(
+    name="With Parcelis",
+    x=["With Parcelis"],
+    y=[with_ann],
+    marker=dict(color="#0D7A4A"),
+    marker_line_width=0,
+    width=0.38,
+    text=[fmt_label(with_ann)],
+    textposition="outside",
+    textfont=dict(size=13, color="#0D7A4A", family="DM Mono, monospace"),
+))
+
+fig.add_trace(go.Bar(
     name="GMV uplift",
-    x=labels,
-    y=[0, uplift_ann],
-    mode="lines+markers+text",
-    line=dict(color="#4547d4", width=2.5),
-    marker=dict(color="#4547d4", size=8, line=dict(color="#fff", width=2)),
-    fill="tozeroy",
-    fillcolor="rgba(69,71,212,0.07)",
-    yaxis="y2",
-    text=["", f"+${uplift_ann/1000:.1f}k" if uplift_ann < 1_000_000 else f"+${uplift_ann/1_000_000:.2f}M"],
-    textposition="top center",
-    textfont=dict(size=12, color="#4547d4"),
+    x=["GMV Uplift"],
+    y=[uplift_ann],
+    marker=dict(color="#4547d4"),
+    marker_line_width=0,
+    width=0.38,
+    text=[f"+{fmt_label(uplift_ann)}"],
+    textposition="outside",
+    textfont=dict(size=13, color="#4547d4", family="DM Mono, monospace"),
 ))
 
 fig.update_layout(
     plot_bgcolor="#f6f6fd",
     paper_bgcolor="#f6f6fd",
     font=dict(family="DM Sans, sans-serif", color="#0c0d2e"),
-    height=340,
-    margin=dict(l=0, r=0, t=40, b=0),
-    legend=dict(
-        orientation="h", yanchor="bottom", y=1.04, xanchor="left", x=0,
-        font=dict(size=11), bgcolor="rgba(0,0,0,0)"
-    ),
+    height=360,
+    margin=dict(l=10, r=10, t=50, b=10),
+    showlegend=False,
     xaxis=dict(
         showgrid=False, zeroline=False,
-        tickfont=dict(size=13, color="rgba(12,13,46,0.6)"),
+        tickfont=dict(size=13, color="rgba(12,13,46,0.65)", family="DM Sans, sans-serif"),
     ),
     yaxis=dict(
         showgrid=True, gridcolor="rgba(12,13,46,0.06)", zeroline=False,
         tickfont=dict(size=10, color="rgba(12,13,46,0.4)"),
         tickprefix="$",
-        title=dict(text="Annual revenue", font=dict(size=10, color="rgba(12,13,46,0.4)")),
+        range=[0, max(with_ann * 1.25, 1)],
     ),
-    yaxis2=dict(
-        overlaying="y", side="right", showgrid=False, zeroline=False,
-        tickfont=dict(size=10, color="#4547d4"),
-        tickprefix="$",
-        title=dict(text="GMV uplift", font=dict(size=10, color="#4547d4")),
-        range=[0, uplift_ann * 4],
-    ),
-    bargap=0.5,
+    bargap=0.3,
 )
 
 st.plotly_chart(fig, use_container_width=True)
 
+# ── FOOTER ──
 st.markdown("""
 <div class="footer-text">
   Powered by <a href="https://myparcelis.com" target="_blank">Parcelis</a>
