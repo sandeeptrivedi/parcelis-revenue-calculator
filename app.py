@@ -132,6 +132,14 @@ div[data-testid="stNumberInput"] label span {
 """, unsafe_allow_html=True)
 
 
+def get_adoption(aov):
+    if aov < 50:   return 30, "30%",        "<$50"
+    if aov < 200:  return 45, "40–50%",     "$50–200"
+    if aov < 400:  return 55, "50–60%",     "$200–400"
+    if aov < 600:  return 65, "60–70%",     "$400–600"
+    if aov < 1000: return 75, "70–80%",     "$600–1000"
+    return          80, "80%",              "$1000+"
+
 def get_tier(aov):
     if aov >= 1000:
         p = round(aov * 0.05, 2)
@@ -191,13 +199,15 @@ with col2:
                            help="Sets the premium & markup tier automatically")
     st.caption("Drives premium & markup tier")
 with col3:
-    st.markdown("**Adoption rate (%)**")
-    adopt = st.number_input("Adoption rate (%)", min_value=1, max_value=100, value=60, step=1,
+    st.markdown("**Adoption rate (%) — auto**")
+    adopt = st.number_input("Adoption rate (%)", min_value=1, max_value=100,
+                             value=auto_adopt, step=1,
                              label_visibility="collapsed",
-                             help="Buyers who opt in to shipping protection at checkout")
-    st.caption("Buyers opting in at checkout")
+                             help="Auto-filled from AOV tier · override if needed")
+    st.caption(f"Reference range: {adopt_range} for AOV {adopt_aov_label} · override if needed")
 
 auto_premium, auto_markup, tier_label = get_tier(aov)
+auto_adopt, adopt_range, adopt_aov_label = get_adoption(aov)
 
 st.markdown('<p class="divider-label">Auto-filled from AOV — override if needed</p>', unsafe_allow_html=True)
 
@@ -218,7 +228,7 @@ with col5:
                               help="Your earnings per protected order")
     st.caption("Auto-filled from AOV · override if needed")
 
-st.markdown(f'<div class="tier-pill">● &nbsp; {tier_label}</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="tier-pill">● &nbsp; {tier_label}  ·  Adoption {adopt_range}</div>', unsafe_allow_html=True)
 st.markdown("---")
 
 # ── CALCULATIONS ──
