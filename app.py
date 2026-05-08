@@ -235,31 +235,30 @@ with m3:
 
 st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
 
-# ── BREAKDOWN EXPANDER ──
-with st.expander("   Full calculation breakdown"):
-    st.markdown("<div style='height:6px'></div>", unsafe_allow_html=True)
-    b1, b2, b3, b4 = st.columns(4)
-    with b1:
-        st.markdown(f"""<div class="bc">
-          <div class="lbl">Orders insured / mo</div>
-          <div class="val">{insured:,}</div>
-        </div>""", unsafe_allow_html=True)
-    with b2:
-        st.markdown(f"""<div class="bc">
-          <div class="lbl">Premium / order</div>
-          <div class="val">${premium:.2f}</div>
-        </div>""", unsafe_allow_html=True)
-    with b3:
-        st.markdown(f"""<div class="bc">
-          <div class="lbl">Monthly GMV</div>
-          <div class="val">{fmt(gmv)}</div>
-        </div>""", unsafe_allow_html=True)
-    with b4:
-        st.markdown(f"""<div class="bc">
-          <div class="lbl">Markup / order</div>
-          <div class="val">${markup:.2f}</div>
-        </div>""", unsafe_allow_html=True)
-    st.markdown("<div style='height:6px'></div>", unsafe_allow_html=True)
+# ── FULL CALCULATION BREAKDOWN ──
+st.markdown("**Full Calculation Breakdown**")
+st.markdown("<div style='height:6px'></div>", unsafe_allow_html=True)
+b1, b2, b3, b4 = st.columns(4)
+with b1:
+    st.markdown(f"""<div class="bc">
+      <div class="lbl">Orders insured / mo</div>
+      <div class="val">{insured:,}</div>
+    </div>""", unsafe_allow_html=True)
+with b2:
+    st.markdown(f"""<div class="bc">
+      <div class="lbl">Premium / order</div>
+      <div class="val">${premium:.2f}</div>
+    </div>""", unsafe_allow_html=True)
+with b3:
+    st.markdown(f"""<div class="bc">
+      <div class="lbl">Monthly GMV</div>
+      <div class="val">{fmt(gmv)}</div>
+    </div>""", unsafe_allow_html=True)
+with b4:
+    st.markdown(f"""<div class="bc">
+      <div class="lbl">Markup / order</div>
+      <div class="val">${markup:.2f}</div>
+    </div>""", unsafe_allow_html=True)
 
 st.divider()
 
