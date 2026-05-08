@@ -2,10 +2,15 @@ import streamlit as st
 import plotly.graph_objects as go
 
 st.set_page_config(
-    page_title="Parcelis Revenue Calculator",
+    page_title="Parcelis · Revenue Calculator",
     page_icon="🛡️",
     layout="centered",
     initial_sidebar_state="collapsed",
+    menu_items={
+        "Get Help": None,
+        "Report a bug": None,
+        "About": None,
+    }
 )
 
 # ── Hide Streamlit chrome ──
@@ -16,12 +21,18 @@ st.markdown("""
 html, body, [class*="st-"], p, label, div, span {
     font-family: 'DM Sans', sans-serif !important;
 }
-#MainMenu, header, footer, [data-testid="stToolbar"],
-[data-testid="stDecoration"], [data-testid="stHeader"] {
-    display: none !important;
-    visibility: hidden !important;
-}
-.block-container { padding-top: 1.5rem !important; }
+#MainMenu { visibility: hidden !important; display: none !important; }
+footer { visibility: hidden !important; display: none !important; }
+header { visibility: hidden !important; display: none !important; }
+[data-testid="stToolbar"] { visibility: hidden !important; display: none !important; }
+[data-testid="stDecoration"] { visibility: hidden !important; display: none !important; }
+[data-testid="stHeader"] { visibility: hidden !important; display: none !important; }
+[data-testid="stAppViewBlockContainer"] > div:first-child { padding-top: 0 !important; }
+section[data-testid="stSidebar"] { display: none !important; }
+.stApp > header { display: none !important; }
+.css-18ni7ap { display: none !important; }
+.css-1dp5vir { display: none !important; }
+.block-container { padding-top: 1rem !important; max-width: 860px !important; }
 
 /* Metric cards */
 .mc {
