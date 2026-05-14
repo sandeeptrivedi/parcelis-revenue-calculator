@@ -254,9 +254,18 @@ st.markdown(f"""
 st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
 
 # ── OVERRIDES (COLLAPSED) ──
-show_override = st.checkbox("Override auto-calculated values", value=False)
+if "show_override" not in st.session_state:
+    st.session_state.show_override = False
 
-if show_override:
+def toggle_override():
+    st.session_state.show_override = not st.session_state.show_override
+
+if not st.session_state.show_override:
+    st.button("Adjust values manually", on_click=toggle_override, type="secondary")
+else:
+    st.button("Use auto-calculated values", on_click=toggle_override, type="secondary")
+
+if st.session_state.show_override:
     st.caption("Pre-filled from AOV. Change only if you have specific data.")
     oc1, oc2, oc3 = st.columns(3)
     with oc1:
