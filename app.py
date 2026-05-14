@@ -13,7 +13,7 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-html, body, [class*="st-"], p, label, div, span {
+html, body, [class*="st-"], p, label, div {
     font-family: 'DM Sans', sans-serif !important;
 }
 
@@ -116,17 +116,21 @@ section[data-testid="stSidebar"] { display: none !important; }
     white-space: normal !important;
     overflow: visible !important;
 }
-[data-testid="stExpander"] summary p,
-[data-testid="stExpander"] summary span,
-[data-testid="stExpander"] summary div {
+[data-testid="stExpander"] summary p {
     font-size: 11px !important;
     font-weight: 500 !important;
     color: #6C757D !important;
     letter-spacing: 0.04em !important;
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: unset !important;
-    text-transform: uppercase !important;
+}
+/* Preserve Material Icons font for the chevron arrow */
+[data-testid="stExpander"] summary svg,
+[data-testid="stExpander"] summary span[data-testid],
+[data-testid="stExpander"] summary .material-icons,
+[data-testid="stExpander"] summary span:not(:last-child) {
+    font-family: "Material Symbols Rounded", "Material Icons" !important;
+    font-size: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
 }
 
 input[type="number"] {
@@ -250,34 +254,30 @@ st.markdown(f"""
 st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
 
 # ── OVERRIDES (COLLAPSED) ──
-with st.expander("Advanced: override auto-calculated values"):
+show_override = st.checkbox("Override auto-calculated values", value=False)
+
+if show_override:
     st.caption("Pre-filled from AOV. Change only if you have specific data.")
     oc1, oc2, oc3 = st.columns(3)
     with oc1:
-        st.markdown("**Adoption rate (%)**")
-        st.number_input(
-            "Adoption rate", min_value=1, max_value=100,
-            value=int(auto_adopt), step=1,
-            key="override_adopt", label_visibility="collapsed"
+        adopt = st.number_input(
+            "Adoption rate (%)", min_value=1, max_value=100,
+            value=int(auto_adopt), step=1
         )
     with oc2:
-        st.markdown("**Premium per order ($)**")
-        st.number_input(
-            "Premium", min_value=0.01, value=float(auto_premium),
-            step=0.01, format="%.2f",
-            key="override_premium", label_visibility="collapsed"
+        premium = st.number_input(
+            "Premium per order ($)", min_value=0.01, value=float(auto_premium),
+            step=0.01, format="%.2f"
         )
     with oc3:
-        st.markdown("**Your markup per order ($)**")
-        st.number_input(
-            "Markup", min_value=0.01, value=float(auto_markup),
-            step=0.01, format="%.2f",
-            key="override_markup", label_visibility="collapsed"
+        markup = st.number_input(
+            "Markup per order ($)", min_value=0.01, value=float(auto_markup),
+            step=0.01, format="%.2f"
         )
-
-adopt   = st.session_state.get("override_adopt",   auto_adopt)
-premium = st.session_state.get("override_premium", auto_premium)
-markup  = st.session_state.get("override_markup",  auto_markup)
+else:
+    adopt = auto_adopt
+    premium = auto_premium
+    markup = auto_markup
 
 st.divider()
 
