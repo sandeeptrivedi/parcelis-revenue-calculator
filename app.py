@@ -16,27 +16,30 @@ st.markdown("""
 html, body, [class*="st-"], p, label, div, span {
     font-family: 'DM Sans', sans-serif !important;
 }
+
+/* Force light background */
+.stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"],
+.main, section.main, [data-testid="block-container"],
+[data-testid="stAppViewBlockContainer"] {
+    background-color: #F8F9FA !important;
+    color: #1A1A1A !important;
+}
+
 #MainMenu, footer, header,
 [data-testid="stToolbar"],
 [data-testid="stDecoration"],
 [data-testid="stHeader"] { visibility: hidden !important; display: none !important; }
 section[data-testid="stSidebar"] { display: none !important; }
 .stApp > header { display: none !important; }
-.block-container { padding-top: 1.5rem !important; max-width: 820px !important; }
-
-/* ── Brand header ── */
-.brand-bar {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 4px;
-}
-.brand-name {
-    font-size: 20px; font-weight: 600; color: #2626AE; letter-spacing: -0.02em;
-}
-.brand-sub {
-    font-size: 12px; color: #6C757D; margin-top: 2px;
+.block-container {
+    padding-top: 1.5rem !important;
+    max-width: 820px !important;
+    background-color: #F8F9FA !important;
 }
 
-/* ── Section label ── */
+.brand-name { font-size: 20px; font-weight: 600; color: #2626AE; letter-spacing: -0.02em; }
+.brand-sub  { font-size: 12px; color: #6C757D; }
+
 .sec-label {
     font-family: 'DM Mono', monospace !important;
     font-size: 10px !important; font-weight: 500 !important;
@@ -44,38 +47,28 @@ section[data-testid="stSidebar"] { display: none !important; }
     color: #6C757D !important; margin-bottom: 10px !important;
 }
 
-/* ── Primary input cards ── */
 .input-card {
-    background: #fff;
-    border: 1.5px solid #2626AE;
-    border-radius: 12px;
-    padding: 20px 20px 14px;
+    background: #FFFFFF; border: 1.5px solid #2626AE;
+    border-radius: 12px; padding: 20px 20px 14px;
 }
 .input-card-label {
     font-size: 11px; font-weight: 600; letter-spacing: 0.07em;
     text-transform: uppercase; color: #2626AE; margin-bottom: 6px;
 }
-.input-card-hint {
-    font-size: 11px; color: #9496ea; margin-top: 4px;
-}
+.input-card-hint { font-size: 11px; color: #6C6CCC; margin-top: 4px; }
 
-/* ── Auto-fill pills ── */
 .auto-row {
-    background: #EEEEFF;
-    border: 1px solid #B0B0E8;
-    border-radius: 8px;
-    padding: 12px 16px;
-    display: flex; gap: 24px; flex-wrap: wrap; align-items: center;
+    background: #EEEEFF; border: 1px solid #B0B0E8; border-radius: 8px;
+    padding: 12px 16px; display: flex; gap: 24px; flex-wrap: wrap; align-items: center;
 }
 .auto-item { text-align: center; }
 .auto-item .al { font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase; color: #9496ea; margin-bottom: 3px; }
+    text-transform: uppercase; color: #6C6CCC; margin-bottom: 3px; }
 .auto-item .av { font-family: 'DM Mono', monospace; font-size: 16px;
     font-weight: 500; color: #2626AE; }
 .auto-divider { width: 1px; height: 32px; background: #B0B0E8; }
-.auto-note { font-size: 11px; color: #9496ea; margin-left: auto; font-style: italic; }
+.auto-note { font-size: 11px; color: #6C6CCC; margin-left: auto; font-style: italic; }
 
-/* ── Result metric cards ── */
 .mc {
     background: #EDFAF4; border: 1px solid #A8E6CA;
     border-radius: 12px; padding: 22px 16px; text-align: center;
@@ -84,46 +77,61 @@ section[data-testid="stSidebar"] { display: none !important; }
     text-transform: uppercase; color: #0A6640; margin-bottom: 10px; }
 .mc .val { font-family: 'DM Mono', monospace; font-size: 30px;
     font-weight: 500; color: #0D7A4A; line-height: 1.1; }
-.mc .sub { font-size: 11px; color: #0A6640; opacity: 0.65; margin-top: 6px; }
+.mc .sub { font-size: 11px; color: #0A6640; opacity: 0.75; margin-top: 6px; }
 
-/* ── Breakdown cards ── */
 .bc {
-    background: rgba(69,71,212,0.08); border: 1px solid rgba(69,71,212,0.2);
+    background: #EEEEFF; border: 1px solid #B0B0E8;
     border-radius: 8px; padding: 12px 10px; text-align: center;
 }
 .bc .lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
-    text-transform: uppercase; color: #9496ea; margin-bottom: 6px; }
+    text-transform: uppercase; color: #6C6CCC; margin-bottom: 6px; }
 .bc .val { font-family: 'DM Mono', monospace; font-size: 18px;
-    font-weight: 500; color: #bdbef4; }
+    font-weight: 500; color: #2626AE; }
 
-/* ── Override expander ── */
+/* Expander — light bg, full label visible */
+[data-testid="stExpander"] {
+    background: #FFFFFF !important;
+    border: 1px solid #D1D5DB !important;
+    border-radius: 8px !important;
+}
 [data-testid="stExpander"] summary {
-    padding-left: 1.5rem !important;
+    padding: 12px 16px !important;
+    white-space: normal !important;
+    overflow: visible !important;
 }
 [data-testid="stExpander"] summary p,
-[data-testid="stExpander"] summary span {
-    font-size: 12px !important; font-weight: 600 !important;
-    color: #9496ea !important;
+[data-testid="stExpander"] summary span,
+[data-testid="stExpander"] summary div {
+    font-size: 13px !important; font-weight: 600 !important;
+    color: #2626AE !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
 }
 
-/* ── Number inputs ── */
 input[type="number"] {
     font-family: 'DM Mono', monospace !important;
     font-size: 15px !important; font-weight: 500 !important;
+    background: #FFFFFF !important; color: #1A1A1A !important;
 }
 button[data-testid="stNumberInputStepUp"],
 button[data-testid="stNumberInputStepDown"] {
-    background: rgba(69,71,212,0.15) !important;
-    border: 1px solid rgba(69,71,212,0.3) !important;
+    background: #EEEEFF !important; border: 1px solid #B0B0E8 !important;
 }
+button[data-testid="stNumberInputStepUp"] svg,
+button[data-testid="stNumberInputStepDown"] svg {
+    fill: #2626AE !important; stroke: #2626AE !important;
+}
+
+hr { border-color: #E5E7EB !important; }
 
 .footer {
     text-align: center; font-size: 11px;
     margin-top: 28px; padding-top: 14px;
-    border-top: 1px solid rgba(120,121,232,0.2);
-    color: rgba(148,150,234,0.6);
+    border-top: 1px solid #E5E7EB;
+    color: #6C757D;
 }
-.footer a { color: #7879e8; text-decoration: none; }
+.footer a { color: #2626AE; text-decoration: none; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -131,23 +139,20 @@ button[data-testid="stNumberInputStepDown"] {
 # ── HELPERS ──
 def get_adoption(aov):
     if aov < 50:     return 30, "<$50"
-    elif aov < 200:  return 45, "$50–200"
-    elif aov < 400:  return 55, "$200–400"
-    elif aov < 600:  return 65, "$400–600"
-    elif aov < 1000: return 75, "$600–1000"
+    elif aov < 200:  return 45, "$50-200"
+    elif aov < 400:  return 55, "$200-400"
+    elif aov < 600:  return 65, "$400-600"
+    elif aov < 1000: return 75, "$600-1000"
     else:            return 80, "$1000+"
 
 def get_tier(aov):
     if aov >= 1000:
-        p = round(aov * 0.05, 2)
-        m = round(aov * 0.03, 2)
-        return p, m
+        return round(aov * 0.05, 2), round(aov * 0.03, 2)
     base, step = 2.50, 1.25
     bucket = max(0, int((aov - 200) / 100)) if aov >= 200 else 0
     extra  = (bucket + 1) * step if aov >= 200 else 0
     p = round(base + extra, 2)
-    m = round(p * 0.60, 2)
-    return p, m
+    return p, round(p * 0.60, 2)
 
 def fmt(n):
     n = round(n)
@@ -158,10 +163,10 @@ def fmt(n):
 
 # ── HEADER ──
 st.markdown("""
-<div class="brand-bar">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
   <span style="font-size:22px;">🛡️</span>
   <span class="brand-name">Parcelis</span>
-  <span style="color:#B0B0E8; margin: 0 4px;">·</span>
+  <span style="color:#B0B0E8;margin:0 4px;">·</span>
   <span class="brand-sub">Revenue Calculator</span>
 </div>
 <div class="brand-sub" style="margin-bottom:20px;">
@@ -176,14 +181,12 @@ st.markdown('<div class="sec-label">Step 1 — Tell us about your store</div>', 
 st.markdown("<div style='height:4px'></div>", unsafe_allow_html=True)
 
 col1, col2 = st.columns(2, gap="medium")
-
 with col1:
     st.markdown('<div class="input-card">', unsafe_allow_html=True)
     st.markdown('<div class="input-card-label">📦 Monthly orders</div>', unsafe_allow_html=True)
     orders = st.number_input(
         "Monthly orders", min_value=1, value=10000, step=500,
-        label_visibility="collapsed",
-        help="Total orders shipped per month"
+        label_visibility="collapsed", help="Total orders shipped per month"
     )
     st.markdown('<div class="input-card-hint">Orders shipped per month</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
@@ -234,9 +237,8 @@ st.markdown(f"""
 st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
 
 # ── OVERRIDES (COLLAPSED) ──
-# Inputs always render inside expander. Streamlit tracks them via key= in session_state.
 with st.expander("⚙️  Advanced — override auto-calculated values"):
-    st.caption("These are pre-filled based on your AOV. Change only if you have specific data.")
+    st.caption("Pre-filled from AOV. Change only if you have specific data.")
     oc1, oc2, oc3 = st.columns(3)
     with oc1:
         st.markdown("**Adoption rate (%)**")
@@ -299,7 +301,6 @@ with m3:
 
 st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
 
-# ── BREAKDOWN ROW ──
 st.markdown("**How we got there**")
 st.markdown("<div style='height:4px'></div>", unsafe_allow_html=True)
 b1, b2, b3, b4 = st.columns(4)
@@ -339,29 +340,29 @@ fig.add_trace(go.Bar(
     name="Without Parcelis", x=["Without Parcelis"], y=[base_ann],
     marker=dict(color="#4547d4"), marker_line_width=0, width=0.38,
     text=[fmt(base_ann)], textposition="outside",
-    textfont=dict(size=13, color="#9496ea", family="DM Mono, monospace"),
+    textfont=dict(size=13, color="#4547d4", family="DM Mono, monospace"),
 ))
 fig.add_trace(go.Bar(
     name="With Parcelis", x=["With Parcelis"], y=[with_ann],
     marker=dict(color="#0D7A4A"), marker_line_width=0, width=0.38,
     text=[fmt(with_ann)], textposition="outside",
-    textfont=dict(size=13, color="#5DCAA5", family="DM Mono, monospace"),
+    textfont=dict(size=13, color="#0D7A4A", family="DM Mono, monospace"),
 ))
 fig.add_trace(go.Bar(
     name="Parcelis Revenue", x=["Parcelis Revenue"], y=[uplift_ann],
-    marker=dict(color="#9496ea"), marker_line_width=0, width=0.38,
+    marker=dict(color="#2626AE"), marker_line_width=0, width=0.38,
     text=[f"+{fmt(uplift_ann)}"], textposition="outside",
-    textfont=dict(size=13, color="#bdbef4", family="DM Mono, monospace"),
+    textfont=dict(size=13, color="#2626AE", family="DM Mono, monospace"),
 ))
 fig.update_layout(
-    plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
-    font=dict(family="DM Sans, sans-serif"),
+    plot_bgcolor="#F8F9FA", paper_bgcolor="#F8F9FA",
+    font=dict(family="DM Sans, sans-serif", color="#1A1A1A"),
     height=340, margin=dict(l=10, r=10, t=40, b=10),
     showlegend=False,
     xaxis=dict(showgrid=False, zeroline=False,
-               tickfont=dict(size=13, family="DM Sans, sans-serif")),
-    yaxis=dict(showgrid=True, gridcolor="rgba(120,121,232,0.15)",
-               zeroline=False, tickprefix="$",
+               tickfont=dict(size=13, color="#1A1A1A", family="DM Sans, sans-serif")),
+    yaxis=dict(showgrid=True, gridcolor="#E5E7EB", zeroline=False,
+               tickprefix="$", tickfont=dict(color="#6C757D"),
                range=[0, max(with_ann * 1.28, 1)]),
     bargap=0.3,
 )
