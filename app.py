@@ -147,14 +147,18 @@ button[data-testid="stNumberInputStepDown"] svg {
     fill: #2626AE !important; stroke: #2626AE !important;
 }
 
-/* Toggle switch */
-[data-testid="stToggle"] label span {
-    font-size: 12px !important;
-    color: #6C757D !important;
-    font-weight: 500 !important;
+/* Checkbox visible styling */
+[data-testid="stCheckbox"] {
+    background: #EEEEFF !important;
+    border: 1px solid #B0B0E8 !important;
+    border-radius: 8px !important;
+    padding: 10px 16px !important;
 }
-[data-testid="stToggle"] [role="checkbox"][aria-checked="true"] {
-    background-color: #2626AE !important;
+[data-testid="stCheckbox"] label p,
+[data-testid="stCheckbox"] label span:last-child {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #2626AE !important;
 }
 
 hr { border-color: #E5E7EB !important; }
@@ -264,17 +268,9 @@ st.markdown(f"""
 st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
 
 # ── OVERRIDES (COLLAPSED) ──
-if "show_override" not in st.session_state:
-    st.session_state.show_override = False
+show_override = st.checkbox("Adjust values manually", value=False)
 
-def toggle_override():
-    st.session_state.show_override = not st.session_state.show_override
-
-toggle_label = "Use auto-calculated values" if st.session_state.show_override else "Adjust values manually"
-st.toggle(toggle_label, value=st.session_state.show_override, key="override_toggle", on_change=lambda: st.session_state.update({"show_override": not st.session_state.show_override}))
-
-if st.session_state.show_override:
-    st.caption("Pre-filled from AOV. Change only if you have specific data.")
+if show_override:
     oc1, oc2, oc3 = st.columns(3)
     with oc1:
         adopt = st.number_input(
