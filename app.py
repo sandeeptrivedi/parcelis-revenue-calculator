@@ -147,6 +147,16 @@ button[data-testid="stNumberInputStepDown"] svg {
     fill: #2626AE !important; stroke: #2626AE !important;
 }
 
+/* Toggle switch */
+[data-testid="stToggle"] label span {
+    font-size: 12px !important;
+    color: #6C757D !important;
+    font-weight: 500 !important;
+}
+[data-testid="stToggle"] [role="checkbox"][aria-checked="true"] {
+    background-color: #2626AE !important;
+}
+
 hr { border-color: #E5E7EB !important; }
 
 .footer {
@@ -260,10 +270,8 @@ if "show_override" not in st.session_state:
 def toggle_override():
     st.session_state.show_override = not st.session_state.show_override
 
-if not st.session_state.show_override:
-    st.button("Adjust values manually", on_click=toggle_override, type="secondary")
-else:
-    st.button("Use auto-calculated values", on_click=toggle_override, type="secondary")
+toggle_label = "Use auto-calculated values" if st.session_state.show_override else "Adjust values manually"
+st.toggle(toggle_label, value=st.session_state.show_override, key="override_toggle", on_change=lambda: st.session_state.update({"show_override": not st.session_state.show_override}))
 
 if st.session_state.show_override:
     st.caption("Pre-filled from AOV. Change only if you have specific data.")
