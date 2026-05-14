@@ -63,6 +63,11 @@ section[data-testid="stSidebar"] { display: none !important; }
     border: none !important; outline: none !important;
     box-shadow: none !important; background: transparent !important;
     padding-left: 0 !important;
+    cursor: text !important; pointer-events: all !important;
+    caret-color: #2626AE !important;
+}
+[data-testid="stNumberInput"] * {
+    pointer-events: all !important;
 }
 [data-testid="stNumberInput"] > div {
     border: none !important; background: transparent !important;
@@ -100,25 +105,28 @@ section[data-testid="stSidebar"] { display: none !important; }
 .bc .val { font-family: 'DM Mono', monospace; font-size: 18px;
     font-weight: 500; color: #2626AE; }
 
-/* Expander — light bg, full label visible */
+/* Expander — light bg, small caption label */
 [data-testid="stExpander"] {
     background: #FFFFFF !important;
-    border: 1px solid #D1D5DB !important;
+    border: 1px solid #E5E7EB !important;
     border-radius: 8px !important;
 }
 [data-testid="stExpander"] summary {
-    padding: 12px 16px !important;
+    padding: 8px 14px !important;
     white-space: normal !important;
     overflow: visible !important;
 }
 [data-testid="stExpander"] summary p,
 [data-testid="stExpander"] summary span,
 [data-testid="stExpander"] summary div {
-    font-size: 13px !important; font-weight: 600 !important;
-    color: #2626AE !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    color: #6C757D !important;
+    letter-spacing: 0.04em !important;
     white-space: normal !important;
     overflow: visible !important;
     text-overflow: unset !important;
+    text-transform: uppercase !important;
 }
 
 input[type="number"] {
@@ -242,7 +250,7 @@ st.markdown(f"""
 st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
 
 # ── OVERRIDES (COLLAPSED) ──
-with st.expander("⚙️  Advanced — override auto-calculated values"):
+with st.expander("Advanced: override auto-calculated values"):
     st.caption("Pre-filled from AOV. Change only if you have specific data.")
     oc1, oc2, oc3 = st.columns(3)
     with oc1:
