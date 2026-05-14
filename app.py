@@ -47,15 +47,27 @@ section[data-testid="stSidebar"] { display: none !important; }
     color: #6C757D !important; margin-bottom: 10px !important;
 }
 
-.input-card {
-    background: #FFFFFF; border: 1.5px solid #2626AE;
-    border-radius: 12px; padding: 20px 20px 14px;
+/* Native Streamlit number input — styled as card */
+[data-testid="stNumberInput"] {
+    background: #FFFFFF !important;
+    border: 1.5px solid #2626AE !important;
+    border-radius: 12px !important;
+    padding: 14px 16px 10px !important;
 }
-.input-card-label {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.07em;
-    text-transform: uppercase; color: #2626AE; margin-bottom: 6px;
+[data-testid="stNumberInput"] label {
+    font-size: 11px !important; font-weight: 600 !important;
+    letter-spacing: 0.07em !important; text-transform: uppercase !important;
+    color: #2626AE !important;
 }
-.input-card-hint { font-size: 11px; color: #6C6CCC; margin-top: 4px; }
+[data-testid="stNumberInput"] input {
+    border: none !important; outline: none !important;
+    box-shadow: none !important; background: transparent !important;
+    padding-left: 0 !important;
+}
+[data-testid="stNumberInput"] > div {
+    border: none !important; background: transparent !important;
+    box-shadow: none !important;
+}
 
 .auto-row {
     background: #EEEEFF; border: 1px solid #B0B0E8; border-radius: 8px;
@@ -182,25 +194,18 @@ st.markdown("<div style='height:4px'></div>", unsafe_allow_html=True)
 
 col1, col2 = st.columns(2, gap="medium")
 with col1:
-    st.markdown('<div class="input-card">', unsafe_allow_html=True)
-    st.markdown('<div class="input-card-label">📦 Monthly orders</div>', unsafe_allow_html=True)
     orders = st.number_input(
-        "Monthly orders", min_value=1, value=10000, step=500,
-        label_visibility="collapsed", help="Total orders shipped per month"
+        "Monthly orders",
+        min_value=1, value=10000, step=500,
+        help="Total orders shipped per month"
     )
-    st.markdown('<div class="input-card-hint">Orders shipped per month</div>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-
 with col2:
-    st.markdown('<div class="input-card">', unsafe_allow_html=True)
-    st.markdown('<div class="input-card-label">💵 Average order value (USD)</div>', unsafe_allow_html=True)
     aov = st.number_input(
-        "Average order value", min_value=1, value=200, step=10,
-        key="aov_input", label_visibility="collapsed",
-        help="Your store's average order value in USD"
+        "Average order value (USD)",
+        min_value=1, value=200, step=10,
+        key="aov_input",
+        help="Your store's average order value — drives all auto-calculations"
     )
-    st.markdown('<div class="input-card-hint">Used to auto-calculate everything below</div>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
 
