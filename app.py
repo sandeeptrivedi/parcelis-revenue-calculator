@@ -234,31 +234,35 @@ st.markdown(f"""
 st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
 
 # ── OVERRIDES (COLLAPSED) ──
+# Inputs always render inside expander. Streamlit tracks them via key= in session_state.
 with st.expander("⚙️  Advanced — override auto-calculated values"):
     st.caption("These are pre-filled based on your AOV. Change only if you have specific data.")
     oc1, oc2, oc3 = st.columns(3)
     with oc1:
         st.markdown("**Adoption rate (%)**")
-        adopt = st.number_input(
+        st.number_input(
             "Adoption rate", min_value=1, max_value=100,
-            value=int(auto_adopt), step=1, label_visibility="collapsed"
+            value=int(auto_adopt), step=1,
+            key="override_adopt", label_visibility="collapsed"
         )
     with oc2:
         st.markdown("**Premium per order ($)**")
-        premium = st.number_input(
+        st.number_input(
             "Premium", min_value=0.01, value=float(auto_premium),
-            step=0.01, format="%.2f", label_visibility="collapsed"
+            step=0.01, format="%.2f",
+            key="override_premium", label_visibility="collapsed"
         )
     with oc3:
         st.markdown("**Your markup per order ($)**")
-        markup = st.number_input(
+        st.number_input(
             "Markup", min_value=0.01, value=float(auto_markup),
-            step=0.01, format="%.2f", label_visibility="collapsed"
+            step=0.01, format="%.2f",
+            key="override_markup", label_visibility="collapsed"
         )
-else:
-    adopt   = auto_adopt
-    premium = auto_premium
-    markup  = auto_markup
+
+adopt   = st.session_state.get("override_adopt",   auto_adopt)
+premium = st.session_state.get("override_premium", auto_premium)
+markup  = st.session_state.get("override_markup",  auto_markup)
 
 st.divider()
 
